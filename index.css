@@ -1,0 +1,12 @@
+body{
+    background-color: blueviolet;
+}
+
+#registration{
+    width: 1260px;
+    height: 470px;
+    position: absolute;
+    top: 100px;
+    background-color: cornsilk;
+
+}
