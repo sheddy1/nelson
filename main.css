@@ -191,10 +191,139 @@ left: 30px;
 
  #track{
     width: 1240px;
-    height: 470px;
+    height: 1200px;
     position: absolute;
     top: 1200px;
     background-color: azure;
+    overflow: scroll;
  }
+
+ .track-header{
+    font-size: 50px;
+    font-weight: bold;
+    font-family: rockwell;
+    position: absolute;
+    top: 0px;
+    left: 400px;
+    color: rgb(14, 7, 54);
+ }
+
+ .track-steps{
+    font-size: 30px;
+    font-weight: bold;
+    font-family: rockwell;
+    position: absolute;
+    top: 70px;
+    left: 200px;
+    color: rgb(14, 7, 54);
+ }
+ 
+.ipadress{
+    width: 1100px;
+    height: 50px;
+    /*background-color: burlywood;*/
+    position: absolute;
+    top: 120px;
+    left: 50px;
+}
+
+.ipadress-input{
+    width: 700px;
+    height: 48px;
+    background-color:rgb(245, 255, 188);
+    border-radius: 30px;;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.ipadress-button{
+    width: 300px;
+    height: 48px;
+    position: absolute;
+    top: 0px;
+    left: 750px;;
+    background-color:rgb(205, 243, 255);
+    border-radius: 30px;;
+    
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+
+}
+
+.coordinates{
+    width: 1100px;
+    height: 200px;
+    background-color: burlywood;
+    position: absolute;
+    top: 250px;
+    left: 50px;
+    overflow: scroll;
+}
+
+.corordinates-input{
+    width: 1100px;
+    height: 50px;
+    background-color: burlywood;
+    position: absolute;
+    top: 500px;
+    left: 50px;
+}
+
+.corordinates-input1{
+    width: 300px;
+    height: 48px;
+    background-color:rgb(245, 255, 188);
+    border-radius: 30px;;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.corordinates-input2{
+    width: 300px;
+    height: 48px;
+    background-color:rgb(245, 255, 188);
+    border-radius: 30px;;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    top: 0px;
+    left: 400px;;
+}
+
+
+.corordinates-button{
+    width: 300px;
+    height: 48px;
+    position: absolute;
+    top: 0px;
+    left: 750px;;
+    background-color:rgb(205, 243, 255);
+    border-radius: 30px;;
+    
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+.google{
+    width: 1100px;
+    height: 500px;
+    background-color: burlywood;
+    position: absolute;
+    top: 600px;
+    left: 50px;
+    
+}
+
+.google1{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
 
  
