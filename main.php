@@ -198,7 +198,113 @@
 </div>
 
 <div id="track">
+    <label class="track-header">
+       *Track your Device*
+    </label>
+
+    <label class="track-steps">
+        Step1: input IP Adress. Step2: 
+        input logitude and latitude
+    </label>
+
+    <form action="" method="post" class="ipadress">
+        <input type="text" name="ip" class="ipadress-input">
+        
+        <input type="submit" value="Get Co-ordinates" class="ipadress-button">
+
+        
+    </form>
+
+    <div class="coordinates">
+        <?php
+        if(isset($_POST['ip']))
+        {
+            $ip = $_POST['ip'];
+
+            if($name == "")
+            {
+                echo"<script>alert('Please input the right ip Adress')</script>";
+            }
+            else{
+
+                $user_ip = getenv('REMOTE_ADDR');
+         echo $user_ip;
+
+         $ip1= "$ip";
+     
+         $settings = [
+             "apiKey" => "f51d9a40068b4981a5dd4956e789d15e",
+             "ip" => "$ip",
+             "lang" => "en",
+             "fields" => "*"
+         ];
+     
+         $url = "https://api.ipgeolocation.io/ipgeo?";
+      
+         foreach($settings as $k=>$v) 
+         {  
+             $url .= urlencode($k) . "=" . urlencode($v) . "&";
+     
+         } 
+     
+         $url = substr($url, 0, -1);
+     
+         $ch =  curl_init();
+     
+         curl_setopt($ch, CURLOPT_URL, $url);
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+     
+         $result= curl_exec($ch);
+         if(curl_errno($ch))
+         {
+             echo curl_error($ch);
+         }
+         else{
+             $result = json_decode($result, 1);
+             print_r($result);
+             echo" \n";
+         }
+     
+         curl_close($ch);
+            }
+
+        }
+        ?>
+
+
+    </div >
+
+    <form action="" method="post" class="corordinates-input">
+    <input type="text" name="cord1" class="corordinates-input1" placeholder="longitude">
+    <input type="text" name="cord2" class="corordinates-input2" placeholder="latitude">  
     
+        <input type="submit" value="Get Location" class="corordinates-button">
+    </form>
+
+    <div class="google">
+
+    <?php
+    if(isset($_POST['cord1']) && isset($_POST['cord2']))
+        {
+            $cord1 = $_POST['cord1'];
+            $cord2 = $_POST['cord2'];
+            
+            if($cord1 == "" && $cord2="")
+            {
+                echo"<script>alert('Please input the right ip Adress')</script>";
+            }
+            else{
+                echo"
+                <iframe class='google1' src='https://maps.google.com/maps?q=$cord1, $cord2 &output=embed' frameborder='0'>
+        
+                    </iframe>
+                ";
+            }
+        }
+
+        ?>
+    </div>
+   
 </div>
 </body>
 </html>
