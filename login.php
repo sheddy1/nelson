@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    session_unset();
+    //session_destroy();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +56,7 @@
 
             if($username == $con1c)
             {
-                session_start();
+                //session_start();
                 $_SESSION['id'] = $con1c;
                 
                       
