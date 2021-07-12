@@ -12,7 +12,7 @@
     <div id="header"><!-- header starts-->
         <img src="images/CU_LOGO.jpg" class="header-logo">
 
-        <img src="images/user.png" class="header-icon">
+        <a href="adminlogin.php"><img src="images/icons8-exit-50.png" class="header-icon"></a>
         
         <?php
         session_start();
@@ -376,6 +376,7 @@
 
              $delete1 = "DELETE FROM device WHERE did='$delete_device'";
              mysqli_query($db, $delete1);
+             //header("Refresh: 1");
                 }
             ?>
         </div>
