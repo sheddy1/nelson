@@ -31,7 +31,7 @@
         <a href="login.php"><img src="images/icons8-exit-50.png" class="header-icon"></a>
         
         <?php
-        session_start();
+        //session_start();
 
         $user="root";
         $pass="";
