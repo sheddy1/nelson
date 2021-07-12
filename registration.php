@@ -5,7 +5,7 @@
             $db = new mysqli('localhost',$user,$pass,$db) 
             or die("could not connect");
 
-            
+            session_start();
         ?>
 
 <!DOCTYPE html>
@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
+
+
     <div id="registration"><!-- reg starts -->
         <form action="" method="post" class="reg-form"><!-- form starts -->
             <label class="reg-header">
@@ -68,7 +70,7 @@
                     </option>
 
                     <option value="daniel">
-                        Peter
+                        Daniel
                     </option>
 
                     <option value="mary">
@@ -174,8 +176,9 @@
             
             $idnum = rand(1000,9999);
 
-            session_start();
+            //session_start();
               $_SESSION['id'] = $idnum;
+              
 
               
 
@@ -197,7 +200,7 @@
 
         <!--<label class="unique1">
             <?php
-            $id = $_SESSION['id'];
+            /*$id = $_SESSION['id'];
             ?>
             Your Unique ID is 
             
@@ -205,13 +208,24 @@
                 echo"
                 <label >
                 $id
-
                 </label>
-
-                "
+                "*/
                 ?>
             
         </label>-->
     </div><!-- reg ends -->
+
+    <div id="bleed1"><!-- header starts-->
+        <img src="images/CU_LOGO.jpg" class="bleed-logo">
+
+       
+
+        <label class="bleed-icon">
+            Already Have a unique code? 
+            <a href="login.php">Login</a>
+        </label>
+        
+        
+    </div><!-- header ends-->
 </body>
 </html>
