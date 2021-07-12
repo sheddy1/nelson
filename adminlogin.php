@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    session_unset();
+    //session_destroy();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,7 +70,7 @@
             {
                 if($pass1 === $con1d)
                 {
-                    session_start();
+                    //session_start();
               $_SESSION['id1'] = $con1c;
 
               echo "<script> alert('Login Succcessful') </script>";
