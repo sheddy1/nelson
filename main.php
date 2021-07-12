@@ -20,7 +20,7 @@
 <div id="header"><!-- header starts-->
         <img src="images/CU_LOGO.jpg" class="header-logo">
 
-        <img src="images/user.png" class="header-icon">
+        <a href="login.php"><img src="images/icons8-exit-50.png" class="header-icon"></a>
         
         <?php
         session_start();
@@ -130,14 +130,16 @@
             echo"<script>alert('Please fill in the blanc spaces!!')</script>";
         }
         else{
-            $idnum = rand(10000,99999);
+            $idnum = $_SESSION['id'];
+            $idnum1 = rand(10000,99999);
+            $sip = getenv('REMOTE_ADDR');
 
             
-            /*$insert = "INSERT INTO device
-            (name,serial,date,color,marks,ip,id) 
-            VALUES ('$name','$serial','$date','$color','$marks','$ip','$idnum')" ;
+            $insert = "INSERT INTO device
+            (name,serial,date,color,marks,ip,id,did,sip) 
+            VALUES ('$name',' $serial','$date','$color','$marks','$ip','$idnum','$idnum1', '$sip')"  ;
               
-              mysqli_query($db,$insert);*/
+              mysqli_query($db,$insert);
 
               //echo"<script>alert('Your device has been registered')</script>";
         }
@@ -152,6 +154,19 @@
 
 
 <div id="device">
+
+    <!--<table  class="head" border="1">
+        <tr>
+            <td class="head-label">sdsd</td>
+            <td class="head-label">sdsd</td>
+            <td class="head-label">sdsd</td>
+            <td class="head-label">sdsd</td>
+            <td class="head-label">sdsd</td>
+            <td class="head-label">sdsd</td>
+            <td class="head-label">sdsd</td>
+            <td class="head-label">sdsd</td>
+        </tr>
+    </table>-->
 
 
     <?php
@@ -171,14 +186,30 @@
               
               $no1= $con1b;
 
-              echo $no1;
+              
 
         echo"<table class='device1' border='1'>";
+
+        echo"
+            <tr>
+            <td class='head-label'>Device Name</td>
+            <td class='head-label'>Serial Number</td></td>
+            <td class='head-label'>Date</td>
+            <td class='head-label'>Color</td>
+            <td class='head-label'>Marks</td>
+            <td class='head-label'>Ip Adress</td>
+            <td class='head-label'>Device Id</td>
+            
+        </tr>
+            
+            ";
 
         for($x = 0; $x<$no1; $x++)
         {
            
             $row = mysqli_fetch_array($con1a);
+            
+
             echo"<tr>";
             
             echo"<td class='device1-label'>".$row['name']."</td>";
@@ -187,8 +218,9 @@
             echo"<td  class='device1-label'>".$row['color']."</td>";
             echo"<td  class='device1-label'>".$row['marks']."</td>";
             echo"<td  class='device1-label'>".$row['ip']."</td>";
-            echo"<td  class='device1-label'> #".$row['id']."</td>";
-           
+            echo"<td  class='device1-label'>".$row['id']."</td>";
+            //echo"<td  class='device1-label'>".$row['sip']."</td>";
+
             echo"</tr>";
             
         }
@@ -275,8 +307,8 @@
     </div >
 
     <form action="" method="post" class="corordinates-input">
-    <input type="text" name="cord1" class="corordinates-input1" placeholder="longitude">
-    <input type="text" name="cord2" class="corordinates-input2" placeholder="latitude">  
+    <input type="text" name="cord1" class="corordinates-input1" placeholder="latitude">
+    <input type="text" name="cord2" class="corordinates-input2" placeholder="longitude">  
     
         <input type="submit" value="Get Location" class="corordinates-button">
     </form>
