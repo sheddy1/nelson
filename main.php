@@ -1,3 +1,11 @@
+<?php
+    session_start();
+
+    $id = $_SESSION['id'];
+
+      echo"<script>alert('Your unique ID is: $id')</script>";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
