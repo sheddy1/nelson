@@ -144,13 +144,36 @@
                 </label>
                 <input type="text" name="email" class="reg-name2" placeholder="Type your email here">
             </div>
-
             
-            <input type="submit" value="REGISTRATION" class="reg-button">
+            <div class="reg-reg">
+            <label class="reg-name1">
+                    REG NO
+                </label>
+                <input type="text" name="regno" class="reg-name2" placeholder="Type your reg no here">
+            </div>
+
+            <div class="reg-select">
+            <label class="reg-name1">
+                    Matric Check
+                </label>
+               
+            <select name="check" class="reg-name2">
+                    <option value="yes">
+                        I have a matric number
+                    </option>
+
+                    <option value="no">
+                        i dont have a matric number
+                    </option>
+
+            </select>
+            </div>
+            
+            <input type="submit" value="REGISTER" class="reg-button">
         </form>
 
         <?php
-        if(isset($_POST['name']) && isset($_POST['email'])   && isset($_POST['matric']) && isset($_POST['hall']) && isset($_POST['level']) && isset($_POST['room']))
+        if(isset($_POST['name']) && isset($_POST['email'])   && isset($_POST['matric']) && isset($_POST['hall']) && isset($_POST['level']) && isset($_POST['room']) && isset($_POST['regno']) && isset($_POST['check']))
         { 
            // 
             $user = "root";
@@ -165,34 +188,66 @@
         $hall = $_POST['hall'];
         $level = $_POST['level'];
         $room = $_POST['room'];
+        $regno = $_POST['regno'];
+        $check = $_POST['check'];
+
+
 
         
         
-        if($name == "" && $email == "" && $matric == "" && $hall == "" && $level == "" && $room == "")
+        if($name == "" && $email == "" && $matric == "" && $hall == "" && $level == "" && $room == "" && $regno == "" )
         {
             echo"<script>alert('Please fill in the blanc spaces!!')</script>";
         }
         else{
-            
+
+            if($check == "yes")
+            {
+                
             $idnum = rand(1000,9999);
 
-            //session_start();
-              $_SESSION['id'] = $idnum;
-              
+           
+            $_SESSION['id'] = $idnum;
+            
 
-              
+            $reg1 = "none";
 
-            $insert = "INSERT INTO reg
-            (name,matric,hall,level,room,email,id) 
-            VALUES ('$name','$matric','$hall','$level','$room','$email','$idnum')" ;
-              
-              mysqli_query($db,$insert);
+          $insert = "INSERT INTO reg
+          (name,matric,hall,level,room,email,id,regno) 
+          VALUES ('$name','$matric','$hall','$level','$room','$email','$idnum','$reg1')" ;
+            
+            mysqli_query($db,$insert);
 
-              header("Location: main.php");
+            //header("Location: main.php");
 
-              //echo"<script>alert('Your unique ID is: $idnum')</script>";
+            echo"<script>
+            location.href= 'main.php';
+            </script>";
 
-              //header("Location: main.php");
+            }
+            else 
+            {
+                $idnum = rand(1000,9999);
+
+           
+                $_SESSION['id'] = $idnum;
+
+    
+              $insert = "INSERT INTO reg
+              (name,matric,hall,level,room,email,id,regno) 
+              VALUES ('$name','$matric','$hall','$level','$room','$email','$idnum','$regno')" ;
+                
+                mysqli_query($db,$insert);
+    
+                //header("Location: main.php");
+    
+                echo"<script>
+                location.href= 'main.php';
+                </script>";
+    
+            }
+          
+             
         }
     }
 
