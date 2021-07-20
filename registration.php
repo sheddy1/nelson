@@ -156,8 +156,7 @@
             <label class="reg-name1">
                     Matric Check
                 </label>
-               
-            <select name="check" class="reg-name2">
+           <select name="check" class="reg-name2">
                     <option value="yes">
                         I have a matric number
                     </option>
@@ -203,18 +202,68 @@
 
             if($check == "yes")
             {
+
+                if (strpos($matric, 'AA')!==false or strpos($matric, 'CH')!== false or strpos($matric, 'AB')!== false
+                or strpos($matric, 'AC')!== false or strpos($matric, 'AD')!== false or strpos($matric, 'AE')!== false
+                or strpos($matric, 'CG')!== false or strpos($matric, 'AF')!== false or strpos($matric, 'BG')!== false
+                or strpos($matric, 'BE')!== false or strpos($matric, 'BC')!== false or strpos($matric, 'AH')!== false
+                or strpos($matric, 'CJ')!== false or strpos($matric, 'AK')!== false or strpos($matric, 'AI')!== false
+                or strpos($matric, 'BB')!== false or strpos($matric, 'CF')!== false or strpos($matric, 'CK')!== false
+                or strpos($matric, 'CA')!== false or strpos($matric, 'CI')!== false or strpos($matric, 'CM')!== false
+                or strpos($matric, 'CO')!== false or strpos($matric, 'CP')!== false or strpos($matric, 'CQ')!== false
+                or strpos($matric, 'CC')!== false or strpos($matric, 'CE')!== false 
+                ) {
+
+        if (strpos($email, 'gmail.com')!==false or strpos($email, 'yahoo.com')!==false) 
+    {
+        $idnum = rand(1000,9999);
+
+           
+        $_SESSION['id'] = $idnum;
+        
+
+        $reg1 = "none";
+
+      $insert = "INSERT INTO reg
+      (name,matric,hall,level,room,email,id,regno) 
+      VALUES ('$name','$matric','$hall','$level','$room','$email','$idnum','$reg1')" ;
+        
+        mysqli_query($db,$insert);
+
+        //header("Location: main.php");
+
+        echo"<script>
+        location.href= 'main.php';
+        </script>";
+    }
+    else 
+    {
+        echo"<script>alert('Invalid Email given')</script>";
+    }
+
+                   
+                }
+
+                else{
+                    echo"<script>alert('This is not a valid matic no')</script>";
+                }
                 
+           
+
+            }
+            else 
+            {
+        if (strpos($email, 'gmail.com')!==false or strpos($email, 'yahoo.com')!==false) 
+        {
             $idnum = rand(1000,9999);
 
            
             $_SESSION['id'] = $idnum;
-            
 
-            $reg1 = "none";
 
           $insert = "INSERT INTO reg
           (name,matric,hall,level,room,email,id,regno) 
-          VALUES ('$name','$matric','$hall','$level','$room','$email','$idnum','$reg1')" ;
+          VALUES ('$name','$matric','$hall','$level','$room','$email','$idnum','$regno')" ;
             
             mysqli_query($db,$insert);
 
@@ -223,27 +272,11 @@
             echo"<script>
             location.href= 'main.php';
             </script>";
-
-            }
-            else 
-            {
-                $idnum = rand(1000,9999);
-
-           
-                $_SESSION['id'] = $idnum;
-
-    
-              $insert = "INSERT INTO reg
-              (name,matric,hall,level,room,email,id,regno) 
-              VALUES ('$name','$matric','$hall','$level','$room','$email','$idnum','$regno')" ;
-                
-                mysqli_query($db,$insert);
-    
-                //header("Location: main.php");
-    
-                echo"<script>
-                location.href= 'main.php';
-                </script>";
+        }
+        else{
+            echo"<script>alert('Invalid Email given')</script>";
+        }
+               
     
             }
           
