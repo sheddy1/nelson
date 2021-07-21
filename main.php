@@ -3,7 +3,85 @@
 
     $id = $_SESSION['id'];
 
-      echo"<script>alert('Your unique ID is: $id')</script>";
+      echo"<script>
+      alert('Your unique ID is: $id')
+      </script>";
+
+      //track save code
+
+      
+
+      $user_ip = getenv('REMOTE_ADDR');
+      //echo $user_ip;
+
+      $ip1= "";
+  
+      $settings = [
+          "apiKey" => "f51d9a40068b4981a5dd4956e789d15e",
+          "ip" => "$ip1",
+          "lang" => "en",
+          "fields" => "*"
+      ];
+  
+      $url = "https://api.ipgeolocation.io/ipgeo?";
+   
+      foreach($settings as $k=>$v) 
+      {  
+          $url .= urlencode($k) . "=" . urlencode($v) . "&";
+  
+      } 
+  
+      $url = substr($url, 0, -1);
+  
+      $ch =  curl_init();
+  
+      curl_setopt($ch, CURLOPT_URL, $url);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  
+      $result= curl_exec($ch);
+      if(curl_errno($ch))
+      {
+          echo curl_error($ch);
+      }
+      else{
+          $result = json_decode($result, 1);
+         // $_SESSION['detail'] = $result;
+         require('userinfo.php');
+
+         $user = "root";
+            $pass = "";
+            $db ="nelson";
+            $db = new mysqli('localhost',$user,$pass,$db)
+             or die("could not connect");
+
+          $device =  UserInfo::get_device();
+    
+          
+        
+          $date = date("d/m/Y");
+          $time = date("h:i:sa");
+          $ip = UserInfo::get_ip();
+          $os = UserInfo::get_os();
+          $id = $_SESSION['id'];
+          $detail = implode(" ",$result);
+
+          $insert = "INSERT INTO track
+            (date,time,detail,device,ip,os,id) 
+            VALUES ('$date','$time','$detail','$device','$ip','$os','$id')"  ;
+              
+              mysqli_query($db,$insert);
+
+          //print_r($result);
+          echo"<br> \n";
+      }
+  
+      curl_close($ch);
+
+    
+
+    
+    
+      
 ?>
 
 <!DOCTYPE html>
@@ -113,12 +191,33 @@
                 <input type="text" name="ip" class="reg-name2" placeholder="Type your IP Adress here">
             </div>
 
+            <div class="reg-select">
+            <label class="reg-name1">
+                    Device Type
+                </label>
+               
+            <select name="check" class="reg-name2">
+                    <option value="laptop">
+                        Laptop
+                    </option>
+
+                    <option value="tablet">
+                        Tablet
+                    </option>
+
+                    <option value="ipod">
+                        Ipod
+                    </option>
+
+            </select>
+            </div>
+
             
             <input type="submit" value="REGISTER" class="reg-button">
         </form>
 
 <?php
-        if(isset($_POST['name']) && isset($_POST['serial'])   && isset($_POST['date']) && isset($_POST['color']) && isset($_POST['marks']) && isset($_POST['ip']))
+        if(isset($_POST['name']) && isset($_POST['serial'])   && isset($_POST['date']) && isset($_POST['color']) && isset($_POST['marks']) && isset($_POST['ip']) && isset($_POST['check']))
         { 
             $user = "root";
             $pass = "";
@@ -132,8 +231,9 @@
         $color = $_POST['color'];
         $marks = $_POST['marks'];
         $ip = $_POST['ip'];
+        $check = $_POST['check'];
 
-        if($name == "" && $serial == "" && $date == "" && $color == "" && $mark == "" && $ip == "")
+        if($name == "" && $serial == "" && $date == "" && $color == "" && $mark == "" && $ip == "" && $check == "")
         {
             echo"<script>alert('Please fill in the blanc spaces!!')</script>";
         }
@@ -144,8 +244,8 @@
 
             
             $insert = "INSERT INTO device
-            (name,serial,date,color,marks,ip,id,did,sip) 
-            VALUES ('$name',' $serial','$date','$color','$marks','$ip','$idnum','$idnum1', '$sip')"  ;
+            (name,serial,date,color,marks,ip,id,did,sip,type) 
+            VALUES ('$name',' $serial','$date','$color','$marks','$ip','$idnum','$idnum1', '$sip','$check')"  ;
               
               mysqli_query($db,$insert);
 
@@ -186,7 +286,7 @@
 
          $id = $_SESSION['id'];
 
-         $con1="SELECT * FROM device";
+         $con1="SELECT * FROM device WHERE id = '$id'";
 
                 $con1a = mysqli_query($db,$con1);
 
@@ -207,6 +307,7 @@
             <td class='head-label'>Marks</td>
             <td class='head-label'>Ip Adress</td>
             <td class='head-label'>Device Id</td>
+            <td class='head-label'>Type</td>
             
         </tr>
             
@@ -226,7 +327,71 @@
             echo"<td  class='device1-label'>".$row['color']."</td>";
             echo"<td  class='device1-label'>".$row['marks']."</td>";
             echo"<td  class='device1-label'>".$row['ip']."</td>";
+            echo"<td  class='device1-label'>".$row['did']."</td>";
+            echo"<td  class='device1-label'>".$row['type']."</td>";
+            //echo"<td  class='device1-label'>".$row['sip']."</td>";
+
+            echo"</tr>";
+            
+        }
+            
+        echo"</table>";
+    ?>
+</div>
+
+<div id = "track-table">
+        <?php
+        $user = "root";
+        $pass = "";
+        $db ="nelson";
+        $db = new mysqli('localhost',$user,$pass,$db)
+         or die("could not connect");
+
+         $id = $_SESSION['id'];
+
+         $con1="SELECT * FROM track WHERE id = '$id'";
+
+                $con1a = mysqli_query($db,$con1);
+
+                $con1b  = mysqli_num_rows($con1a);
+              
+              $no1= $con1b;
+
+              
+
+        echo"<table class='device1' border='1'>";
+
+        echo"
+            <tr>
+            <td class='head-label'>Date of Sign in</td>
+            <td class='head-label'>Time of sign in</td></td>
+            <td class='head-label'>Details</td>
+            <td class='head-label'>Device Used</td>
+            <td class='head-label'>IP Adress</td>
+            <td class='head-label'>Operating System</td>
+            <td class='head-label'>ID Number</td>
+            
+            
+        </tr>
+            
+            ";
+
+        for($x = 0; $x<$no1; $x++)
+        {
+           
+            $row = mysqli_fetch_array($con1a);
+            
+
+            echo"<tr>";
+            
+            echo"<td class='device1-label'>".$row['date']."</td>";
+            echo"<td  class='device1-label'>".$row['time']."</td>";
+            echo"<td  class='device1-label'>".$row['detail']."</td>";
+            echo"<td  class='device1-label'>".$row['device']."</td>";
+            echo"<td  class='device1-label'>".$row['ip']."</td>";
+            echo"<td  class='device1-label'>".$row['os']."</td>";
             echo"<td  class='device1-label'>".$row['id']."</td>";
+            //echo"<td  class='device1-label'>".$row['type']."</td>";
             //echo"<td  class='device1-label'>".$row['sip']."</td>";
 
             echo"</tr>";
@@ -268,7 +433,7 @@
             else{
 
                 $user_ip = getenv('REMOTE_ADDR');
-         echo $user_ip;
+         //echo $user_ip;
 
          $ip1= "$ip";
      
@@ -302,7 +467,7 @@
          else{
              $result = json_decode($result, 1);
              print_r($result);
-             echo" \n";
+             echo"<br> \n";
          }
      
          curl_close($ch);
