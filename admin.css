@@ -90,14 +90,15 @@ body{
 }
 
 .studentreg-tablebody{
-    position: absolute;
-    top: 170px;
-    left: 20px;
-    width:1190px;
-    background-color: cornsilk;
-  
-    text-align: center;
-}
+    width: 1150px;
+        height: 450px;
+        position: absolute;
+        top: 60px;
+        left: 30px;
+        background-color: azure;
+        text-align: center;
+        overflow: scroll;
+    }
 
 .studentreg-tablebodyh{
     position: absolute;
@@ -109,10 +110,62 @@ body{
     text-align: centre;
 }
 
+
+.student-check{
+    width:270px;
+    height: 400px;
+    background: #fffffd;
+    position: absolute;
+    left: 470px;
+    top: 550px;
+}
+
+.student-check-form{
+    width: 250px;
+    height: 100px;
+    
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.sname{
+    width: 250px;
+    height: 100px;
+    background-color: aqua;
+    position: absolute;
+    top: 150px;
+    left: 10px;
+}
+
+.smat{
+    width: 250px;
+    height: 100px;
+    background-color: aqua;
+    position: absolute;
+    top: 280px;
+    left: 10px;
+}
+
+.student-check-i{
+    width: 240px;
+    height: 40px;
+}
+
+.student-check-b{
+    width: 240px;
+    height: 40px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    background-color: aqua;
+}
+
+
 .studentreg-tablebodyh1{
     font-size: 40px;
     width: 200px;
-    ;
+    ; 
 }
 
 .device1-label{
@@ -258,12 +311,30 @@ body{
     top: 450px;
 }
 
+.student-add-reg{
+    width: 350px;
+    height: 70px;
+    background-color: azure;
+    position: absolute;
+    left: 25px;
+    top: 550px;
+}
+
+.student-add-check{
+    width: 350px;
+    height: 70px;
+    background-color: azure;
+    position: absolute;
+    left: 25px;
+    top: 650px;
+}
+
 .student-add-button{
     width: 342px;
     height: 30px;
     position: absolute;
     left: 25px;
-    top: 550px;
+    top: 750px;
     font-weight: bold;
 
 }
@@ -271,9 +342,19 @@ body{
 #device{
     width: 1230px;
     height: 1000px;
-    background-color:rgb(150, 220, 248) ;
+    background-color:rgb(156, 221, 233) ;
     position: absolute;
     top: 1200px;
+    left: 20px;
+    overflow: scroll;
+}
+
+.device-track{
+    width: 1230px;
+    height: 600px;
+    background-color:rgb(201, 236, 213) ;
+    position: absolute;
+    top: 2300px;
     left: 20px;
     overflow: scroll;
 }
@@ -282,7 +363,7 @@ body{
     width: 1240px;
     height: 1200px;
     position: absolute;
-    top: 2300px;
+    top: 3000px;
     background-color:rgb(255, 238, 231);
     overflow: scroll;
  }
