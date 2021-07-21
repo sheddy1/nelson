@@ -18,7 +18,7 @@
         <img src="images/CU_LOGO.jpg" class="login-logo">
 
         <form action="" method="post">
-        <input type="text" class="login-input" name="username">
+        <input type="text" class="login-input" name="username" placeholder="Enter Unique pin here">
         <button type="submit" class="login-button">
             Sign In
         </button>
